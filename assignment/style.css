@@ -1,0 +1,25 @@
+* {
+    margin:0;
+    padding: 0;
+    
+}
+
+body {
+    overflow: hidden;
+}
+
+#container {
+    width: 100vh;
+    height: 100vh;
+}
+
+.element {
+    width: 200px;
+    height: 100px;
+    background: cyan;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+}
