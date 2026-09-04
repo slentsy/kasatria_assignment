@@ -9,17 +9,41 @@ body {
 }
 
 #container {
-    width: 100vh;
+    width: 100vw;
     height: 100vh;
 }
 
 .element {
     width: 200px;
-    height: 100px;
+    height: 500px;
     background: cyan;
     color: black;
+    text-align: center;
+    padding: 15px;
+    box-sizing: border-box;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif;    
+    flex-direction: column;
+}
+
+.photo {
+    width: 70px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.age, .country, .interest, .netWorth {
+    font-size: 14px;
+    margin: 8px 0;
 }

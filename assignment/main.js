@@ -24,19 +24,55 @@ renderer.setSize(
 
 document.getElementById('container').appendChild(renderer.domElement);
 
-const square = document.createElement('div');
+const people = [
+    {
+        name: "Sophia Madlentsy Tambunan", 
+        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
+        age: 25, 
+        country: "CN", 
+        interest: "Writing", 
+        netWorth: 251260.8
+    }, 
+    {
+        name: "Prabowo Subianto", 
+        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
+        age: 25, 
+        country: "CN", 
+        interest: "Writing", 
+        netWorth: 251260.8
+    }
+]
 
-square.className = "element";
+function createTile(person, index){
+    const square = document.createElement('div');
 
-square.textContent = "Hello three.js"
+    square.className = "element";
 
-const objectCss = new CSS3DObject(element);
+    square.innerHTML = `
+        <img class="photo" src="${person.photo}" alt="${person.name}">
+        <div class="name">${person.name}</div>
+        <div class="age">${person.age}</div>
+        <div class="country">${person.country}</div>
+        <div class="interest">${person.interest}</div>
+        <div class="netWorth">${person.netWorth}</div>
+    `
 
-objectCss.position.x = 0;
-objectCss.position.y = 0;
-objectCss.position.z = 0;
+    const objectCss = new CSS3DObject(square);
 
-scene.add(objectCss);
+    objectCss.position.x = index * 250;
+    objectCss.position.y = 0;
+    objectCss.position.z = 0;
+
+    scene.add(objectCss);
+}
+
+let index = 0;
+
+//membuat personnya
+for (const person of people){
+    createTile(person, index);
+    index++;
+}
 
 controls = new TrackballControls(camera, renderer.domElement);
 
@@ -53,6 +89,8 @@ function animate(){
 function render(){
     renderer.render(scene, camera);
 }
+
+
 
 animate();
 
