@@ -12,6 +12,14 @@ let scene;
 let renderer; 
 let controls; 
 
+const objects = [];
+
+const targets = {
+    sphere: [],
+    helix:[], 
+    grid:[]
+}
+
 scene = new THREE.Scene();
 camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 10000); 
 camera.position.z = 3000; 
@@ -25,274 +33,10 @@ renderer.setSize(
 
 document.getElementById('container').appendChild(renderer.domElement);
 
-const people = [
-    {
-        name: "Sophia Madlentsy Tambunan", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 25, 
-        country: "CN", 
-        interest: "Writing", 
-        netWorth: 251260.8
-    }, 
-    {
-        name: "New Yee Chian", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 23, 
-        country: "CN", 
-        interest: "Cooking", 
-        netWorth: 60393.60
-    }, 
-    {
-        name: "Wong Thiam Fook", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 30, 
-        country: "CN", 
-        interest: "Travelling", 
-        netWorth: 146174.4
-    },
-    {
-        name: "Sophia Madlentsy Tambunan", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 25, 
-        country: "CN", 
-        interest: "Writing", 
-        netWorth: 251260.8
-    }, 
-    {
-        name: "New Yee Chian", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 23, 
-        country: "CN", 
-        interest: "Cooking", 
-        netWorth: 60393.60
-    }, 
-    {
-        name: "Wong Thiam Fook", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 30, 
-        country: "CN", 
-        interest: "Travelling", 
-        netWorth: 146174.4
-    },
-    {
-        name: "Sophia Madlentsy Tambunan", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 25, 
-        country: "CN", 
-        interest: "Writing", 
-        netWorth: 251260.8
-    }, 
-    {
-        name: "New Yee Chian", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 23, 
-        country: "CN", 
-        interest: "Cooking", 
-        netWorth: 60393.60
-    }, 
-    {
-        name: "Wong Thiam Fook", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 30, 
-        country: "CN", 
-        interest: "Travelling", 
-        netWorth: 146174.4
-    },
-    {
-        name: "Sophia Madlentsy Tambunan", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 25, 
-        country: "CN", 
-        interest: "Writing", 
-        netWorth: 251260.8
-    }, 
-    {
-        name: "New Yee Chian", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 23, 
-        country: "CN", 
-        interest: "Cooking", 
-        netWorth: 60393.60
-    }, 
-    {
-        name: "Wong Thiam Fook", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 30, 
-        country: "CN", 
-        interest: "Travelling", 
-        netWorth: 146174.4
-    },
-    {
-        name: "Sophia Madlentsy Tambunan", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 25, 
-        country: "CN", 
-        interest: "Writing", 
-        netWorth: 251260.8
-    }, 
-    {
-        name: "New Yee Chian", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 23, 
-        country: "CN", 
-        interest: "Cooking", 
-        netWorth: 60393.60
-    }, 
-    {
-        name: "Wong Thiam Fook", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 30, 
-        country: "CN", 
-        interest: "Travelling", 
-        netWorth: 146174.4
-    },
-    {
-        name: "Sophia Madlentsy Tambunan", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 25, 
-        country: "CN", 
-        interest: "Writing", 
-        netWorth: 251260.8
-    }, 
-    {
-        name: "New Yee Chian", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 23, 
-        country: "CN", 
-        interest: "Cooking", 
-        netWorth: 60393.60
-    }, 
-    {
-        name: "Wong Thiam Fook", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 30, 
-        country: "CN", 
-        interest: "Travelling", 
-        netWorth: 146174.4
-    },
-    {
-        name: "Sophia Madlentsy Tambunan", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 25, 
-        country: "CN", 
-        interest: "Writing", 
-        netWorth: 251260.8
-    }, 
-    {
-        name: "New Yee Chian", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 23, 
-        country: "CN", 
-        interest: "Cooking", 
-        netWorth: 60393.60
-    }, 
-    {
-        name: "Wong Thiam Fook", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 30, 
-        country: "CN", 
-        interest: "Travelling", 
-        netWorth: 146174.4
-    },
-    {
-        name: "Sophia Madlentsy Tambunan", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 25, 
-        country: "CN", 
-        interest: "Writing", 
-        netWorth: 251260.8
-    }, 
-    {
-        name: "New Yee Chian", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 23, 
-        country: "CN", 
-        interest: "Cooking", 
-        netWorth: 60393.60
-    }, 
-    {
-        name: "Wong Thiam Fook", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 30, 
-        country: "CN", 
-        interest: "Travelling", 
-        netWorth: 146174.4
-    },
-    {
-        name: "Sophia Madlentsy Tambunan", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 25, 
-        country: "CN", 
-        interest: "Writing", 
-        netWorth: 251260.8
-    }, 
-    {
-        name: "New Yee Chian", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 23, 
-        country: "CN", 
-        interest: "Cooking", 
-        netWorth: 60393.60
-    }, 
-    {
-        name: "Wong Thiam Fook", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 30, 
-        country: "CN", 
-        interest: "Travelling", 
-        netWorth: 146174.4
-    },
-    {
-        name: "Sophia Madlentsy Tambunan", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 25, 
-        country: "CN", 
-        interest: "Writing", 
-        netWorth: 251260.8
-    }, 
-    {
-        name: "New Yee Chian", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 23, 
-        country: "CN", 
-        interest: "Cooking", 
-        netWorth: 60393.60
-    }, 
-    {
-        name: "Wong Thiam Fook", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 30, 
-        country: "CN", 
-        interest: "Travelling", 
-        netWorth: 146174.4
-    },
-    {
-        name: "Sophia Madlentsy Tambunan", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 25, 
-        country: "CN", 
-        interest: "Writing", 
-        netWorth: 251260.8
-    }, 
-    {
-        name: "New Yee Chian", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 23, 
-        country: "CN", 
-        interest: "Cooking", 
-        netWorth: 60393.60
-    }, 
-    {
-        name: "Wong Thiam Fook", 
-        photo: "https://static.kasatria.com/pivot-img/photo/019.jpg", 
-        age: 30, 
-        country: "CN", 
-        interest: "Travelling", 
-        netWorth: 146174.4
-    }
-]
+let people = [];
 
 function createTile(person, index){
+    
     const square = document.createElement('div');
 
     square.className = "element";
@@ -315,7 +59,6 @@ function createTile(person, index){
     `
 
     const objectCss = new CSS3DObject(square);
-
     const column = index % 20; 
     const row = Math.floor(index/20);
 
@@ -324,14 +67,7 @@ function createTile(person, index){
     objectCss.position.z = 0;
 
     scene.add(objectCss);
-}
-
-let index = 0;
-
-//membuat personnya
-for (const person of people){
-    createTile(person, index);
-    index++;
+    objects.push(objectCss);
 }
 
 controls = new TrackballControls(camera, renderer.domElement);
@@ -342,12 +78,26 @@ controls.maxDistance = 6000;
 function animate(){
     requestAnimationFrame(animate);
 
+    TWEEN.update();
     controls.update();
     render();
 }
 
 function render(){
     renderer.render(scene, camera);
+}
+
+function transform(targets, duration){
+    for ( let i = 0; i < objects.length; i ++ ) {
+        
+        const object = objects[ i ];
+		const target = targets[ i ];
+
+		new TWEEN.Tween( object.position ).to( { x: target.position.x, y: target.position.y, z: target.position.z }, Math.random() * duration + duration ).easing( TWEEN.Easing.Exponential.InOut ).start();
+
+		new TWEEN.Tween( object.rotation ).to( { x: target.rotation.x, y: target.rotation.y, z: target.rotation.z }, Math.random() * duration + duration ).easing( TWEEN.Easing.Exponential.InOut ).start();
+
+	}
 }
 
 // Auth Goole 
@@ -367,14 +117,28 @@ window.onGoogleLibraryLoad = () =>{
 }
 
 const googleLoginButton = document.getElementById('google-login'); 
+const sphereButton = document.getElementById('sphere-button');
+const helixButton = document.getElementById('helix-button');
+const gridButton = document.getElementById('grid-button');
 
-googleLoginButton.addEventListener('click', ()=>{
+googleLoginButton.addEventListener('click', ()=> {
     client.requestAccessToken();
 })
 
-// function onTokenResponse(response) {
-//     console.log(response);
-// }
+sphereButton.addEventListener('click', ()=> {
+    // client.requestAccessToken();
+    transform(targets.sphere, 2000);
+})
+
+helixButton.addEventListener('click', ()=> {
+    // client.requestAccessToken();
+    transform(targets.helix, 2000);
+})
+
+gridButton.addEventListener('click', ()=> {
+    // client.requestAccessToken();
+    transform(targets.grid, 2000);
+})
 
 // Spreadsheets
 const SPREADSHEETS_ID = '1wYeH6s9TFiMBJkJglY_b8H0WlQyFifhMBrr1PpZfm3o';
@@ -392,7 +156,90 @@ function onTokenResponse(response){
             Authorization: `Bearer ${accessToken}`
         }
     }).then((response) => response.json()).then((data) => {
-        console.log(data);
+        console.log("Google Sheet data:", data);
+
+        const values = data.values; 
+
+        people = values.slice(1).map((row) =>{
+            return{
+                name: row[0], 
+                photo:row[1], 
+                age:Number(row[2]),
+                country: row[3], 
+                interest:row[4], 
+                netWorth:Number(row[5].replace(/[$,]/g, ''))
+            };
+        }); 
+        console.log("People:", people);
+        console.log("Total people:", people.length)
+
+        let index = 0;
+
+        //membuat personnya
+        for (const person of people){
+            createTile(person, index);
+            index++;
+        }
+
+        // sphere
+        const vector = new THREE.Vector3();
+
+        for(let i = 0, l = objects.length; i < l; i ++) {
+            
+            const phi = Math.acos( - 1 + ( 2 * i ) / l );
+            const theta = Math.sqrt( l * Math.PI ) * phi;
+            const object = new THREE.Object3D();
+
+            object.position.setFromSphericalCoords(800, phi, theta);
+
+            vector.copy(object.position).multiplyScalar(2);
+
+            object.lookAt(vector);
+
+            targets.sphere.push(object);
+        }
+
+        console.log("Total sphere target:", targets.sphere.length)
+
+        sphereButton.disabled = false;
+
+        // helix 
+        for ( let i = 0, l = objects.length; i < l; i ++ ) {
+            
+            const theta = i * 0.175 + Math.PI;
+			const y = - ( i * 8 ) + 450;
+
+			const object = new THREE.Object3D();
+
+			object.position.setFromCylindricalCoords( 900, theta, y );
+
+			vector.x = object.position.x * 2;
+			vector.y = object.position.y;
+			vector.z = object.position.z * 2;
+
+			object.lookAt( vector );
+
+			targets.helix.push( object );
+
+		}
+
+        helixButton.disabled = false; 
+
+        // grid 
+        for ( let i = 0; i < objects.length; i ++ ) {
+
+			const object = new THREE.Object3D();
+
+			object.position.x = ( ( i % 5 ) * 400 ) - 800;
+			object.position.y = ( - ( Math.floor( i / 5 ) % 5 ) * 400 ) + 800;
+			object.position.z = ( Math.floor( i / 25 ) ) * 1000 - 2000;
+
+			targets.grid.push( object );
+
+		}
+
+        gridButton.disabled = false;
+
     }).catch((error) => {
         console.error(error);
     });

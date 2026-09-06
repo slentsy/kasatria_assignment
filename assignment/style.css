@@ -20,6 +20,27 @@ body {
     z-index: 1000;
 }
 
+#sphere-button{
+    position:fixed;
+    top: 40px;
+    left: 20px;
+    z-index: 1000;
+}
+
+#helix-button{
+    position:fixed;
+    top: 60px;
+    left: 20px;
+    z-index: 1000;
+}
+
+#grid-button{
+    position:fixed;
+    top: 80px;
+    left: 20px;
+    z-index: 1000;
+}
+
 .element {
     width: 140px;
     height: 300px;
