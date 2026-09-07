@@ -23,7 +23,7 @@ const targets = {
 
 scene = new THREE.Scene();
 camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 10000); 
-camera.position.z = 3000; 
+camera.position.z = 4500; 
 
 renderer = new CSS3DRenderer();
 
@@ -63,8 +63,8 @@ function createTile(person, index){
     const column = index % 20; 
     const row = Math.floor(index/20);
 
-    objectCss.position.x = column * 150 - 1495;
-    objectCss.position.y = -row * 320;
+    objectCss.position.x = column * 150 - 1425;
+    objectCss.position.y = -row * 320 + 1440;
     objectCss.position.z = 0;
 
     scene.add(objectCss);
@@ -72,8 +72,8 @@ function createTile(person, index){
 
     const tableTarget = new THREE.Object3D();
 
-    tableTarget.position.x = column * 150 - 1495;
-    tableTarget.position.y = -row * 320;
+    tableTarget.position.x = column * 150 - 1425;
+    tableTarget.position.y = -row * 320 + 1440;
     tableTarget.position.z = 0;
 
     targets.table.push(tableTarget);
@@ -82,7 +82,8 @@ function createTile(person, index){
 controls = new TrackballControls(camera, renderer.domElement);
 
 controls.minDistance = 500;
-controls.maxDistance = 6000; 
+controls.maxDistance = 6000;
+controls.target.set(0,0,0);
 
 function animate(){
     requestAnimationFrame(animate);
