@@ -15,6 +15,7 @@ let controls;
 const objects = [];
 
 const targets = {
+    table:[],
     sphere: [],
     helix:[], 
     grid:[]
@@ -68,6 +69,14 @@ function createTile(person, index){
 
     scene.add(objectCss);
     objects.push(objectCss);
+
+    const tableTarget = new THREE.Object3D();
+
+    tableTarget.position.x = column * 150 - 1495;
+    tableTarget.position.y = -row * 320;
+    tableTarget.position.z = 0;
+
+    targets.table.push(tableTarget);
 }
 
 controls = new TrackballControls(camera, renderer.domElement);
@@ -88,14 +97,26 @@ function render(){
 }
 
 function transform(targets, duration){
+    TWEEN.removeAll();
+
     for ( let i = 0; i < objects.length; i ++ ) {
         
         const object = objects[ i ];
 		const target = targets[ i ];
 
-		new TWEEN.Tween( object.position ).to( { x: target.position.x, y: target.position.y, z: target.position.z }, Math.random() * duration + duration ).easing( TWEEN.Easing.Exponential.InOut ).start();
+		new TWEEN.Tween(object.position).to({ 
+            x: target.position.x, 
+            y: target.position.y, 
+            z: target.position.z 
+        }, 
+        Math.random() * duration + duration).easing(TWEEN.Easing.Exponential.InOut).start();
 
-		new TWEEN.Tween( object.rotation ).to( { x: target.rotation.x, y: target.rotation.y, z: target.rotation.z }, Math.random() * duration + duration ).easing( TWEEN.Easing.Exponential.InOut ).start();
+		new TWEEN.Tween(object.rotation).to({ 
+            x: target.rotation.x, 
+            y: target.rotation.y, 
+            z: target.rotation.z 
+        }, 
+        Math.random() * duration + duration).easing(TWEEN.Easing.Exponential.InOut).start();
 
 	}
 }
@@ -114,15 +135,25 @@ window.onGoogleLibraryLoad = () =>{
     });
 
     console.log('Google Oauth Ready');
+
+    client.requestAccessToken({
+        prompt: ''
+    })
 }
 
-const googleLoginButton = document.getElementById('google-login'); 
+const googleLoginButton = document.getElementById('google-login');
+const tableButton = document.getElementById('table-button') 
 const sphereButton = document.getElementById('sphere-button');
 const helixButton = document.getElementById('helix-button');
 const gridButton = document.getElementById('grid-button');
 
 googleLoginButton.addEventListener('click', ()=> {
     client.requestAccessToken();
+})
+
+tableButton.addEventListener('click', ()=> {
+    // client.requestAccessToken();
+    transform(targets.table, 2000);
 })
 
 sphereButton.addEventListener('click', ()=> {
@@ -190,7 +221,7 @@ function onTokenResponse(response){
             const theta = Math.sqrt( l * Math.PI ) * phi;
             const object = new THREE.Object3D();
 
-            object.position.setFromSphericalCoords(800, phi, theta);
+            object.position.setFromSphericalCoords(1300, phi, theta);
 
             vector.copy(object.position).multiplyScalar(2);
 
@@ -199,9 +230,7 @@ function onTokenResponse(response){
             targets.sphere.push(object);
         }
 
-        console.log("Total sphere target:", targets.sphere.length)
-
-        sphereButton.disabled = false;
+        // console.log("Total sphere target:", targets.sphere.length)
 
         // helix 
         for ( let i = 0, l = objects.length; i < l; i ++ ) {
@@ -223,8 +252,6 @@ function onTokenResponse(response){
 
 		}
 
-        helixButton.disabled = false; 
-
         // grid 
         for ( let i = 0; i < objects.length; i ++ ) {
 
@@ -238,6 +265,10 @@ function onTokenResponse(response){
 
 		}
 
+        // disable button
+        tableButton.disabled = false;
+        sphereButton.disabled = false;
+        helixButton.disabled = false; 
         gridButton.disabled = false;
 
     }).catch((error) => {

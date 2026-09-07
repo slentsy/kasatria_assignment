@@ -13,37 +13,73 @@ body {
     height: 100vh;
 }
 
-#google-login {
+#controls{
+    position:fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+
+    padding: 12px;
+    background: rgba(225, 225, 225, 0.9);
+    border-radius: 10px;
+}
+
+#layout-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+#controls button {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#controls button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* #google-login {
     position:fixed;
     top: 20px;
     left: 20px;
     z-index: 1000;
 }
 
-#sphere-button{
+#table-button{
     position:fixed;
     top: 40px;
     left: 20px;
     z-index: 1000;
 }
 
-#helix-button{
+#sphere-button{
     position:fixed;
     top: 60px;
     left: 20px;
     z-index: 1000;
 }
 
-#grid-button{
+#helix-button{
     position:fixed;
     top: 80px;
     left: 20px;
     z-index: 1000;
 }
 
+#grid-button{
+    position:fixed;
+    top: 100px;
+    left: 20px;
+    z-index: 1000;
+} */
+
 .element {
     width: 140px;
-    height: 300px;
+    height: 230px;
     background: cyan;
     color: black;
     text-align: center;
@@ -55,24 +91,31 @@ body {
     justify-content: center;
     font-family: Arial, sans-serif;
     flex-direction: column;
+
+    overflow: hidden;
 }
 
 .photo {
-    width: 70px;
-    height: 80px;
+    width: 55px;
+    height: 55px;
     object-fit: cover;
     border-radius: 50%;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    flex-shrink: 0;
 }
 
 .name {
-    font-size: 20px;
+    font-size: 14px;
     font-weight: bold;
-    margin-bottom: 15px;
+    line-height: 1.1;
+    margin-bottom: 8px;
+
+    width: 100%;
+    overflow-wrap: anywhere;
 }
 
 .age, .country, .interest, .netWorth {
-    font-size: 14px;
-    margin: 8px 0;
+    font-size: 11px;
+    margin: 3px 0;
 }
 
