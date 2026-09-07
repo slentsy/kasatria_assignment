@@ -23,7 +23,7 @@ const targets = {
 
 scene = new THREE.Scene();
 camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 10000); 
-camera.position.z = 4500; 
+camera.position.z = 5000; 
 
 renderer = new CSS3DRenderer();
 
@@ -120,6 +120,8 @@ function transform(targets, duration){
         Math.random() * duration + duration).easing(TWEEN.Easing.Exponential.InOut).start();
 
 	}
+
+    
 }
 
 // Auth Goole 
@@ -135,13 +137,13 @@ window.onGoogleLibraryLoad = () =>{
         callback: onTokenResponse 
     });
 
-    console.log('Google Oauth Ready');
-
     client.requestAccessToken({
         prompt: ''
     })
 }
 
+const layoutButtons = document.getElementById('layout-buttons')
+const authControls = document.getElementById('auth-controls');
 const googleLoginButton = document.getElementById('google-login');
 const tableButton = document.getElementById('table-button') 
 const sphereButton = document.getElementById('sphere-button');
@@ -177,7 +179,6 @@ const SPREADSHEETS_ID = '1wYeH6s9TFiMBJkJglY_b8H0WlQyFifhMBrr1PpZfm3o';
 const RANGE = 'Data Template.csv!A1:F201';
 
 function onTokenResponse(response){
-    console.log(response);
 
     const accessToken = response.access_token;
 
@@ -188,7 +189,6 @@ function onTokenResponse(response){
             Authorization: `Bearer ${accessToken}`
         }
     }).then((response) => response.json()).then((data) => {
-        console.log("Google Sheet data:", data);
 
         const values = data.values; 
 
@@ -202,8 +202,6 @@ function onTokenResponse(response){
                 netWorth:Number(row[5].replace(/[$,]/g, ''))
             };
         }); 
-        console.log("People:", people);
-        console.log("Total people:", people.length)
 
         let index = 0;
 
@@ -230,8 +228,6 @@ function onTokenResponse(response){
 
             targets.sphere.push(object);
         }
-
-        // console.log("Total sphere target:", targets.sphere.length)
 
         // helix 
         for ( let i = 0, l = objects.length; i < l; i ++ ) {
@@ -271,6 +267,15 @@ function onTokenResponse(response){
         sphereButton.disabled = false;
         helixButton.disabled = false; 
         gridButton.disabled = false;
+
+        // display 
+        layoutButtons.style.display = 'flex';
+
+        // none authControls
+        authControls.style.display = 'none';
+
+        // none login 
+        googleLoginButton.style.display = 'none';
 
     }).catch((error) => {
         console.error(error);
